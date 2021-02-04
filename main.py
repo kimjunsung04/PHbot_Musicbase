@@ -15,9 +15,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from oauth2client.tools import argparser
 
-intents = discord.Intents.all()
-intents.presences = False
-client = discord.AutoShardedClient(intents=intents)
+client = discord.Client()
 
 queues = {}
 musiclist = {}
