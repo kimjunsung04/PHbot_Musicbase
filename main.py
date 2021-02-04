@@ -24,6 +24,7 @@ vote = {}
 
 token = "봇 토큰"
 prf = "봇 접두사"
+now_vol = 1
 
 def print_progress(iteration, total, prefix='Progress:', suffix='Complete', decimals=1, bar_length=10):
     str_format = "{0:." + str(decimals) + "f}"
@@ -59,7 +60,6 @@ async def on_message(message):
                 nowplay[id].append(now_p)
             else:
                 nowplay[id] = [now_p] #딕셔너리 쌍 추가
-            now_vol = 50
             player = discord.PCMVolumeTransformer(queues[id].pop(0),volume=now_vol)
             musiclist[id].pop(0)
             message.guild.voice_client.play(player, after=lambda e: check_queue(message.guild.id, message.author.id))
@@ -180,7 +180,6 @@ async def on_message(message):
             except AttributeError:
                 is_p = False
             if is_p == True:#예약
-                now_vol = 50
                 player = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(source=m_url, before_options="-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"),volume=now_vol)
                 if server.id in queues:
                     queues[server.id].append(player)
@@ -214,7 +213,6 @@ async def on_message(message):
             else:
                 nowplay[server.id] = [now_p] #딕셔너리 쌍 추가
             mant = f"[{title}]({m_urld}) {cho} 를 재생합니다!"
-            now_vol = 50
             source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(source=m_url, before_options="-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"),volume=now_vol)
             try:
                 mis = message.guild.voice_client.is_connected()
@@ -345,7 +343,6 @@ async def on_message(message):
         except AttributeError:
             is_p = False
         if is_p == True:#예약
-            now_vol = 50
             player = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(source=m_url, before_options="-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"),volume=now_vol)
             if server.id in queues:
                 queues[server.id].append(player)
